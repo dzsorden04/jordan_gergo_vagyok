@@ -25,3 +25,19 @@
 
 </body>
 </html>
+<p>
+  <a href="#" id="menekulo">Titkos fül</a>
+</p>
+
+<script>
+const btn = document.getElementById("menekulo");
+
+btn.addEventListener("mouseover", function() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  btn.style.position = "absolute";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+});
+</script>

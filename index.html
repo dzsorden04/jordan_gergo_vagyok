@@ -8,7 +8,7 @@
   body {
     margin: 0;
     font-family: "Times New Roman", Times, serif;
-    background: #d46a8c; /* paszteles bíborvörös */
+    background: #d46a8c;
     color: white;
     text-align: center;
     overflow: hidden;
@@ -56,7 +56,6 @@ Vinted
 <canvas id="trail"></canvas>
 
 <script>
-// MENEKÜLŐ GOMB
 const btn = document.getElementById("menekulo");
 
 btn.addEventListener("mouseover", function() {
@@ -68,7 +67,6 @@ btn.addEventListener("mouseover", function() {
   btn.style.top = y + "px";
 });
 
-// EGÉR "FOLYÓ" EFFEKT
 const canvas = document.getElementById("trail");
 const ctx = canvas.getContext("2d");
 
@@ -96,7 +94,7 @@ function animate() {
     ctx.fillStyle = "rgba(150, 0, 40," + c.alpha + ")";
     ctx.fill();
 
-    c.alpha -= 0.01; // kb 4 másodperc alatt eltűnik
+    c.alpha -= 0.01;
 
     if (c.alpha <= 0) {
       circles.splice(i, 1);
@@ -109,7 +107,6 @@ function animate() {
 
 animate();
 
-// resize fix
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;

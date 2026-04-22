@@ -14,6 +14,10 @@
     overflow: hidden;
   }
 
+/* onlyfans */
+#onlyfans {
+    position: relative;
+
   h1 {
     margin-top: 50px;
   }

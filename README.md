@@ -65,7 +65,7 @@ Instagram
 Vinted
 </a>
 
-<a href="#" onclick="toggleGallery()">munkáim</a>
+<a href="#" onclick="toggleGallery()">Munkáim</a>
 
 <div id="gallery">
   <img src="rajz1.png">

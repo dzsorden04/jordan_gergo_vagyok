@@ -7,58 +7,46 @@
 <style>
 body {
     margin: 0;
-    background: #ffd8a8;
+    background: white;
     font-family: Arial, sans-serif;
     overflow: hidden;
-}
-
-/* FEJLÉC */
-header {
-    height: 10vh;
-    background: url("header.jpg") center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
 }
 
 /* BAL OLDAL MENÜ */
 .menu {
     position: absolute;
-    top: 10vh;
-    left: 5%;
-    width: 40%;
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
 }
 
 .menu a, .menu div {
     display: block;
-    margin: 20px 0;
+    margin: 15px 0;
     font-size: 22px;
     cursor: pointer;
+    color: black;
+    text-decoration: none;
 }
 
-/* JOBB OLDALI AUTO SLIDER */
+/* JOBB OLDALI SLIDER */
 .slider {
     position: absolute;
-    top: 10vh;
     right: 0;
+    top: 0;
     width: 50%;
-    height: 90vh;
+    height: 100vh;
 }
 
 .slider img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    transition: opacity 0.2s ease;
 }
 
-/* ONLYFANS */
-#onlyfans {
-    position: relative;
-}
-
-/* GALÉRIA TELJES KÉPERNYŐ */
+/* GALÉRIA */
 #gallery {
     display: none;
     position: fixed;
@@ -66,49 +54,54 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: black;
-    align-items: center;
-    justify-content: center;
+    background: white;
+    overflow-y: auto;
+    text-align: center;
 }
 
 #gallery img {
-    max-width: 80%;
-    max-height: 80%;
+    width: 200px;
+    margin: 10px;
 }
 
-/* NYILAK */
-.arrow {
-    position: absolute;
+/* EGÉR VÍZ EFFEKT */
+.trail {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fade 2s forwards;
+}
+
+@keyframes fade {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+/* FOTO17 FLASH */
+#flash {
+    position: fixed;
     top: 50%;
-    font-size: 40px;
-    color: white;
-    cursor: pointer;
-}
-
-#left { left: 20px; }
-#right { right: 20px; }
-
-/* KILÉPÉS */
-#close {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    color: red;
-    font-size: 30px;
-    cursor: pointer;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
-<header>ez itt a fejléc</header>
-
 <div class="menu">
+
 <a href="https://www.instagram.com/tebolyult.asvanykarkoto.fuggo/" target="_blank">Instagram</a>
+
 <a href="https://www.vinted.hu/member/129409216" target="_blank">Vinted</a>
-<div onclick="openGallery()">Munkáim</div>
-<div id="onlyfans">OnlyFans</div>
+
+<div onclick="toggleGallery()">Munkáim</div>
+
 </div>
 
 <div class="slider">
@@ -116,71 +109,80 @@ header {
 </div>
 
 <div id="gallery">
-<div id="left" class="arrow">&#8592;</div>
-<img id="galleryImg" src="foto1.png">
-<div id="right" class="arrow">&#8594;</div>
-<div id="close">X</div>
+<h2>Munkáim</h2>
+
+<img src="foto1.png">
+<img src="foto2.png">
+<img src="foto3.png">
+<img src="foto4.png">
+<img src="foto5.png">
+<img src="foto6.png">
+<img src="foto7.bmp">
+<img src="foto8.png">
+<img src="foto9.png">
+<img src="foto10.png">
+
 </div>
+
+<img id="flash" src="foto17.png">
 
 <script>
 
-// KATTINTÁS HANG (CSAK FŐOLDALON)
-document.addEventListener("click", () => {
-    if(document.getElementById("gallery").style.display !== "flex"){
-        let audio = new Audio("hang1.ogg");
-        audio.volume = 0.2;
-        audio.play();
-    }
-});
+// SLIDER (6 kép)
+let imgs = [
+"foto11.png","foto12.ico","foto13.png",
+"foto14.ico","foto15.ico","foto16.png"
+];
 
-// ONLYFANS MENEKÜL (CSÚSZVA)
-const of = document.getElementById("onlyfans");
-
-of.addEventListener("mouseover", () => {
-    let x = Math.random() * 400;
-    let y = Math.random() * 300;
-
-    of.style.position = "relative";
-    of.style.transition = "0.5s";
-    of.style.left = x + "px";
-    of.style.top = y + "px";
-});
-
-// AUTO SLIDER (JOBB OLDAL)
-let sliderImages = ["foto11.png","foto12.ico","foto13.png","foto14.ico","foto15.ico","foto16.png"];
-let sIndex = 0;
+let i = 0;
 
 setInterval(() => {
-    sIndex = (sIndex + 1) % sliderImages.length;
-    document.getElementById("sliderImg").src = sliderImages[sIndex];
+    i = (i + 1) % imgs.length;
+
+    let img = document.getElementById("sliderImg");
+    img.style.opacity = 0;
+
+    setTimeout(() => {
+        img.src = imgs[i];
+        img.style.opacity = 1;
+    }, 200);
+
 }, 5000);
 
 // GALÉRIA
-let images = [
-"foto1.png","foto2.png","foto3.png","foto4.png","foto5.png",
-"foto6.png","foto7.bmp","foto8.png"
-];
-
-let index = 0;
-
-function openGallery(){
-    document.getElementById("gallery").style.display = "flex";
-    document.getElementById("galleryImg").src = images[index];
+function toggleGallery(){
+    let g = document.getElementById("gallery");
+    g.style.display = (g.style.display === "block") ? "none" : "block";
 }
 
-document.getElementById("left").onclick = () => {
-    index = (index - 1 + images.length) % images.length;
-    document.getElementById("galleryImg").src = images[index];
-};
+// EGÉR VÍZ
+document.addEventListener("mousemove", (e) => {
+    let d = document.createElement("div");
+    d.className = "trail";
+    d.style.left = (e.pageX - 20) + "px";
+    d.style.top = (e.pageY - 20) + "px";
 
-document.getElementById("right").onclick = () => {
-    index = (index + 1) % images.length;
-    document.getElementById("galleryImg").src = images[index];
-};
+    document.body.appendChild(d);
 
-document.getElementById("close").onclick = () => {
-    document.getElementById("gallery").style.display = "none";
-};
+    setTimeout(() => d.remove(), 2000);
+});
+
+// CLICK HANG
+document.addEventListener("click", () => {
+    let audio = new Audio("hang4.ogg");
+    audio.volume = 0.2;
+    audio.play();
+});
+
+// FOTO17 FLASH 2s
+document.addEventListener("click", () => {
+    let f = document.getElementById("flash");
+    f.style.opacity = 0.4;
+
+    setTimeout(() => {
+        f.style.opacity = 0;
+    }, 2000);
+});
 
 </script>
 

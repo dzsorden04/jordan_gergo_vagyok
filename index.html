@@ -127,7 +127,7 @@ header {
 // KATTINTÁS HANG (CSAK FŐOLDALON)
 document.addEventListener("click", () => {
     if(document.getElementById("gallery").style.display !== "flex"){
-        let audio = new Audio("hang1.mp3");
+        let audio = new Audio("hang1.ogg");
         audio.volume = 0.2;
         audio.play();
     }
@@ -147,7 +147,7 @@ of.addEventListener("mouseover", () => {
 });
 
 // AUTO SLIDER (JOBB OLDAL)
-let sliderImages = ["foto1.png","foto2.png","foto3.png","foto4.png","foto5.png","foto6.png"];
+let sliderImages = ["foto11.png","foto12.ico","foto13.png","foto14.ico","foto15.ico","foto16.png"];
 let sIndex = 0;
 
 setInterval(() => {
@@ -158,7 +158,7 @@ setInterval(() => {
 // GALÉRIA
 let images = [
 "foto1.png","foto2.png","foto3.png","foto4.png","foto5.png",
-"foto6.png","foto7.png","foto8.png","foto9.png","foto10.png"
+"foto6.png","foto7.bmp","foto8.png"
 ];
 
 let index = 0;

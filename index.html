@@ -15,19 +15,7 @@ body{
     font-family:'UnifrakturCook', cursive;
 }
 
-/* FEJLÉC */
-
-header{
-    height:10vh;
-    background:url("header.png") center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:38px;
-}
-
-/* BAL MENÜ */
+/* BAL OLDALI MENÜ */
 
 .menu{
     position:absolute;
@@ -40,12 +28,13 @@ header{
 .menu a,
 .menu div{
     display:block;
-    margin:25px 0;
+    margin:28px 0;
     font-size:42px;
     color:black;
     text-decoration:none;
     cursor:pointer;
     transition:0.2s;
+    width:max-content;
 }
 
 .menu a:hover,
@@ -64,9 +53,9 @@ header{
 .slider{
     position:absolute;
     right:0;
-    top:10vh;
+    top:0;
     width:52%;
-    height:90vh;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -79,7 +68,7 @@ header{
     transition:opacity 0.2s ease;
 }
 
-/* GALÉRIA */
+/* FULLSCREEN GALÉRIA */
 
 #gallery{
     display:none;
@@ -89,14 +78,14 @@ header{
     width:100%;
     height:100%;
     background:white;
-    z-index:20;
+    z-index:50;
     justify-content:center;
     align-items:center;
 }
 
 #gallery img{
-    max-width:85%;
-    max-height:85%;
+    max-width:88%;
+    max-height:88%;
     object-fit:contain;
 }
 
@@ -126,7 +115,7 @@ header{
     position:absolute;
     right:30px;
     bottom:20px;
-    font-size:50px;
+    font-size:52px;
     color:red;
     cursor:pointer;
 }
@@ -148,13 +137,13 @@ header{
     to{opacity:0;}
 }
 
-/* KATTINTÓS FOTO17 */
+/* FOTO17 FELVILLANÁS */
 
 #flashImage{
     position:fixed;
-    width:260px;
-    pointer-events:none;
+    width:240px;
     opacity:0;
+    pointer-events:none;
     z-index:100;
 }
 
@@ -162,8 +151,6 @@ header{
 </head>
 
 <body>
-
-<header>ez itt a fejléc</header>
 
 <div class="menu">
 
@@ -175,7 +162,7 @@ Instagram
 Vinted
 </a>
 
-<div onclick="openGallery()">
+<div id="worksButton">
 Munkáim
 </div>
 
@@ -185,7 +172,7 @@ OnlyFans
 
 </div>
 
-<!-- JOBB OLDALI AUTO SLIDER -->
+<!-- JOBB OLDALI AUTOMATA KÉPEK -->
 
 <div class="slider">
 <img id="sliderImg" src="foto1.png">
@@ -197,7 +184,7 @@ OnlyFans
 
 <div id="leftArrow" class="arrow">&#8592;</div>
 
-<img id="galleryImage" src="foto1.png">
+<img id="galleryImage" src="foto7.png">
 
 <div id="rightArrow" class="arrow">&#8594;</div>
 
@@ -205,7 +192,7 @@ OnlyFans
 
 </div>
 
-<!-- FOTO17 -->
+<!-- FELVILLANÓ KÉP -->
 
 <img id="flashImage" src="foto17.png">
 
@@ -249,10 +236,9 @@ let sliderImages = [
 "foto13.png",
 "foto14.ico",
 "foto15.ico",
-"foto18.png"
-"header.png"
+"foto18.png",
 "foto20.png"
-    
+
 ];
 
 let sliderIndex = 0;
@@ -274,7 +260,7 @@ setInterval(() => {
 
 }, 5000);
 
-/* FULLSCREEN GALÉRIA */
+/* GALÉRIA */
 
 let galleryImages = [
 
@@ -287,20 +273,21 @@ let galleryImages = [
 "foto7.bmp",
 "foto8.png",
 "foto19.png",
-"foto16.png"
+"header.png"
 
 ];
 
 let currentImage = 0;
 
-function openGallery(){
+const gallery = document.getElementById("gallery");
+const galleryImage = document.getElementById("galleryImage");
 
-    document.getElementById("gallery").style.display = "flex";
+document.getElementById("worksButton").onclick = () => {
 
-    document.getElementById("galleryImage").src =
-    galleryImages[currentImage];
+    gallery.style.display = "flex";
+    galleryImage.src = galleryImages[currentImage];
 
-}
+};
 
 document.getElementById("leftArrow").onclick = () => {
 
@@ -310,8 +297,7 @@ document.getElementById("leftArrow").onclick = () => {
         currentImage = galleryImages.length - 1;
     }
 
-    document.getElementById("galleryImage").src =
-    galleryImages[currentImage];
+    galleryImage.src = galleryImages[currentImage];
 
 };
 
@@ -323,14 +309,13 @@ document.getElementById("rightArrow").onclick = () => {
         currentImage = 0;
     }
 
-    document.getElementById("galleryImage").src =
-    galleryImages[currentImage];
+    galleryImage.src = galleryImages[currentImage];
 
 };
 
 document.getElementById("closeGallery").onclick = () => {
 
-    document.getElementById("gallery").style.display = "none";
+    gallery.style.display = "none";
 
 };
 
@@ -355,14 +340,14 @@ document.addEventListener("mousemove", (e) => {
 
 });
 
-/* FOTO17 KATTINTÁS POZÍCIÓBAN */
+/* FOTO17 FELVILLANÁS */
 
 document.addEventListener("click", (e) => {
 
     let flash = document.getElementById("flashImage");
 
-    flash.style.left = (e.pageX - 130) + "px";
-    flash.style.top = (e.pageY - 130) + "px";
+    flash.style.left = (e.pageX - 120) + "px";
+    flash.style.top = (e.pageY - 120) + "px";
 
     flash.style.opacity = 0.4;
 

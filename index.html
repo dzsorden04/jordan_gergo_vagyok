@@ -281,11 +281,17 @@ let currentImage = 0;
 
 const gallery = document.getElementById("gallery");
 const galleryImage = document.getElementById("galleryImage");
+let galleryMusic = new Audio("hang2.flac");
+galleryMusic.loop = true;
+galleryMusic.volume = 0.15;
 
 document.getElementById("worksButton").onclick = () => {
 
     gallery.style.display = "flex";
     galleryImage.src = galleryImages[currentImage];
+
+    galleryMusic.pause();
+galleryMusic.currentTime = 0;
 
 };
 
@@ -302,6 +308,8 @@ document.getElementById("leftArrow").onclick = () => {
 };
 
 document.getElementById("rightArrow").onclick = () => {
+
+    galleryMusic.play();
 
     currentImage++;
 

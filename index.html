@@ -2,186 +2,376 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Gergely</title>
+<title>Jordán Gergely</title>
+
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    background: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+
+body{
+    margin:0;
+    background:white;
+    overflow:hidden;
+    font-family:'UnifrakturCook', cursive;
 }
 
-/* BAL OLDAL MENÜ */
-.menu {
-    position: absolute;
-    left: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: left;
+/* FEJLÉC */
+
+header{
+    height:10vh;
+    background:url("header.png") center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:38px;
 }
 
-.menu a, .menu div {
-    display: block;
-    margin: 15px 0;
-    font-size: 22px;
-    cursor: pointer;
-    color: black;
-    text-decoration: none;
+/* BAL MENÜ */
+
+.menu{
+    position:absolute;
+    left:8%;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:5;
+}
+
+.menu a,
+.menu div{
+    display:block;
+    margin:25px 0;
+    font-size:42px;
+    color:black;
+    text-decoration:none;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.menu a:hover,
+.menu div:hover{
+    opacity:0.6;
+}
+
+/* ONLYFANS */
+
+#onlyfans{
+    position:relative;
 }
 
 /* JOBB OLDALI SLIDER */
-.slider {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
-    height: 100vh;
+
+.slider{
+    position:absolute;
+    right:0;
+    top:10vh;
+    width:52%;
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.slider img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: opacity 0.2s ease;
+.slider img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:opacity 0.2s ease;
 }
 
 /* GALÉRIA */
-#gallery {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    overflow-y: auto;
-    text-align: center;
+
+#gallery{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:white;
+    z-index:20;
+    justify-content:center;
+    align-items:center;
 }
 
-#gallery img {
-    width: 200px;
-    margin: 10px;
+#gallery img{
+    max-width:85%;
+    max-height:85%;
+    object-fit:contain;
 }
 
-/* EGÉR VÍZ EFFEKT */
-.trail {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    background: rgba(0,0,0,0.08);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: fade 2s forwards;
+/* NYILAK */
+
+.arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:60px;
+    color:black;
+    cursor:pointer;
+    user-select:none;
 }
 
-@keyframes fade {
-    from {opacity:1;}
-    to {opacity:0;}
+#leftArrow{
+    left:30px;
 }
 
-/* FOTO17 FLASH */
-#flash {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    pointer-events: none;
+#rightArrow{
+    right:30px;
 }
+
+/* PIROS X */
+
+#closeGallery{
+    position:absolute;
+    right:30px;
+    bottom:20px;
+    font-size:50px;
+    color:red;
+    cursor:pointer;
+}
+
+/* EGÉR EFFEKT */
+
+.trail{
+    position:fixed;
+    width:40px;
+    height:40px;
+    background:rgba(0,0,0,0.08);
+    border-radius:50%;
+    pointer-events:none;
+    animation:fade 2s forwards;
+}
+
+@keyframes fade{
+    from{opacity:1;}
+    to{opacity:0;}
+}
+
+/* KATTINTÓS FOTO17 */
+
+#flashImage{
+    position:fixed;
+    width:260px;
+    pointer-events:none;
+    opacity:0;
+    z-index:100;
+}
+
 </style>
 </head>
 
 <body>
 
+<header>ez itt a fejléc</header>
+
 <div class="menu">
 
-<a href="https://www.instagram.com/tebolyult.asvanykarkoto.fuggo/" target="_blank">Instagram</a>
+<a href="https://www.instagram.com/tebolyult.asvanykarkoto.fuggo/" target="_blank">
+Instagram
+</a>
 
-<a href="https://www.vinted.hu/member/129409216" target="_blank">Vinted</a>
+<a href="https://www.vinted.hu/member/129409216" target="_blank">
+Vinted
+</a>
 
-<div onclick="toggleGallery()">Munkáim</div>
+<div onclick="openGallery()">
+Munkáim
+</div>
+
+<div id="onlyfans">
+OnlyFans
+</div>
 
 </div>
+
+<!-- JOBB OLDALI AUTO SLIDER -->
 
 <div class="slider">
 <img id="sliderImg" src="foto1.png">
 </div>
 
-<div id="gallery">
-<h2>Munkáim</h2>
+<!-- FULLSCREEN GALÉRIA -->
 
-<img src="foto1.png">
-<img src="foto2.png">
-<img src="foto3.png">
-<img src="foto4.png">
-<img src="foto5.png">
-<img src="foto6.png">
-<img src="foto7.bmp">
-<img src="foto8.png">
-<img src="foto9.png">
-<img src="foto10.png">
+<div id="gallery">
+
+<div id="leftArrow" class="arrow">&#8592;</div>
+
+<img id="galleryImage" src="foto1.png">
+
+<div id="rightArrow" class="arrow">&#8594;</div>
+
+<div id="closeGallery">X</div>
 
 </div>
 
-<img id="flash" src="foto17.png">
+<!-- FOTO17 -->
+
+<img id="flashImage" src="foto17.png">
 
 <script>
 
-// SLIDER (6 kép)
-let imgs = [
-"foto11.png","foto12.ico","foto13.png",
-"foto14.ico","foto15.ico","foto16.png"
+/* KATTINTÁS HANG */
+
+document.addEventListener("click", () => {
+
+    if(document.getElementById("gallery").style.display !== "flex"){
+
+        let audio = new Audio("hang1.ogg");
+        audio.volume = 0.12;
+        audio.play();
+
+    }
+
+});
+
+/* ONLYFANS MENEKÜLÉS */
+
+const onlyfans = document.getElementById("onlyfans");
+
+onlyfans.addEventListener("mouseover", () => {
+
+    let x = Math.random() * 300;
+    let y = Math.random() * 300;
+
+    onlyfans.style.transition = "0.5s";
+    onlyfans.style.left = x + "px";
+    onlyfans.style.top = y + "px";
+
+});
+
+/* JOBB OLDALI SLIDER */
+
+let sliderImages = [
+
+"foto11.png",
+"foto12.ico",
+"foto13.png",
+"foto14.ico",
+"foto15.ico",
+"foto18.png"
+"header.png"
+"foto20.png"
+    
 ];
 
-let i = 0;
+let sliderIndex = 0;
 
 setInterval(() => {
-    i = (i + 1) % imgs.length;
+
+    sliderIndex = (sliderIndex + 1) % sliderImages.length;
 
     let img = document.getElementById("sliderImg");
+
     img.style.opacity = 0;
 
     setTimeout(() => {
-        img.src = imgs[i];
+
+        img.src = sliderImages[sliderIndex];
         img.style.opacity = 1;
+
     }, 200);
 
 }, 5000);
 
-// GALÉRIA
-function toggleGallery(){
-    let g = document.getElementById("gallery");
-    g.style.display = (g.style.display === "block") ? "none" : "block";
+/* FULLSCREEN GALÉRIA */
+
+let galleryImages = [
+
+"foto1.png",
+"foto2.png",
+"foto3.png",
+"foto4.png",
+"foto5.png",
+"foto6.png",
+"foto7.bmp",
+"foto8.png",
+"foto19.png",
+"foto16.png"
+
+];
+
+let currentImage = 0;
+
+function openGallery(){
+
+    document.getElementById("gallery").style.display = "flex";
+
+    document.getElementById("galleryImage").src =
+    galleryImages[currentImage];
+
 }
 
-// EGÉR VÍZ
+document.getElementById("leftArrow").onclick = () => {
+
+    currentImage--;
+
+    if(currentImage < 0){
+        currentImage = galleryImages.length - 1;
+    }
+
+    document.getElementById("galleryImage").src =
+    galleryImages[currentImage];
+
+};
+
+document.getElementById("rightArrow").onclick = () => {
+
+    currentImage++;
+
+    if(currentImage >= galleryImages.length){
+        currentImage = 0;
+    }
+
+    document.getElementById("galleryImage").src =
+    galleryImages[currentImage];
+
+};
+
+document.getElementById("closeGallery").onclick = () => {
+
+    document.getElementById("gallery").style.display = "none";
+
+};
+
+/* EGÉR VIZES EFFEKT */
+
 document.addEventListener("mousemove", (e) => {
+
     let d = document.createElement("div");
+
     d.className = "trail";
+
     d.style.left = (e.pageX - 20) + "px";
     d.style.top = (e.pageY - 20) + "px";
 
     document.body.appendChild(d);
 
-    setTimeout(() => d.remove(), 2000);
+    setTimeout(() => {
+
+        d.remove();
+
+    }, 2000);
+
 });
 
-// CLICK HANG
-document.addEventListener("click", () => {
-    let audio = new Audio("hang4.ogg");
-    audio.volume = 0.2;
-    audio.play();
-});
+/* FOTO17 KATTINTÁS POZÍCIÓBAN */
 
-// FOTO17 FLASH 2s
-document.addEventListener("click", () => {
-    let f = document.getElementById("flash");
-    f.style.opacity = 0.4;
+document.addEventListener("click", (e) => {
+
+    let flash = document.getElementById("flashImage");
+
+    flash.style.left = (e.pageX - 130) + "px";
+    flash.style.top = (e.pageY - 130) + "px";
+
+    flash.style.opacity = 0.4;
 
     setTimeout(() => {
-        f.style.opacity = 0;
+
+        flash.style.opacity = 0;
+
     }, 2000);
+
 });
 
 </script>
